@@ -1,0 +1,70 @@
+---
+title: "Hw5-Analysis"
+author: "Hy Mak"
+date: "4/26/2018"
+output: html_document
+---
+
+# Download necessary libaries
+
+```{r setup, message=FALSE}
+library(tidyverse)
+```
+
+# Import Rule of Law and Democracy Data
+
+```{r}
+
+# Tidy the data
+
+(democracy <- read_csv("uds_summary.csv",
+                       col_types = cols(year = col_number())) %>%
+    filter(country %in% c("Malaysia", 
+                      "Singapore", 
+                      "Zambia", 
+                      "Ghana", 
+                      "Sierra Leone", 
+                      "Laos", 
+                      "Cambodia", 
+                      "Morocco", 
+                      "Algeria", 
+                      "Tunisia")) %>%
+   select(country, year, mean) %>%
+   rename(Year = "year",
+          Country = "country",
+          Demo_Score = "mean"))
+
+(law <- read_csv("Rule_of_law_WB.csv",
+                       col_types = cols(Year = col_number())) %>%
+    rename(ROL_Estimate = "Rule of Law: Estimate [RL.EST]",
+           ROL_Percentile = "Rule of Law: Percentile Rank [RL.PER.RNK]",
+           Year = "Time",
+           Country = "Country Name") %>%
+    select(Year, 
+           Country, 
+           ROL_Estimate, 
+           ROL_Percentile) %>%
+    mutate(Country = ifelse(Country == "Lao PDR", 'Laos', Country)) %>%
+    mutate(Year = as.numeric(Year)))
+
+(demo_law <- democracy %>%
+    left_join(law, by = c("Year", "Country"))
+)
+
+
+```
+
+
+```{r}
+demo_law %>%
+  ggplot(aes(Demo_Score, 
+        ROL_Percentile), na.rm = TRUE) +
+  geom_point() + 
+  geom_smooth()
+  
+```
+
+
+```{r}
+```
+
