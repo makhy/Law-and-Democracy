@@ -47,9 +47,8 @@ library(tidyverse)
     mutate(Country = ifelse(Country == "Lao PDR", 'Laos', Country)) %>%
     mutate(Year = as.numeric(Year)))
 
-(demo_law <- democracy %>%
+demo_law <- democracy %>%
     left_join(law, by = c("Year", "Country"))
-)
 
 
 ```
@@ -61,13 +60,16 @@ demo_law %>%
         ROL_Estimate), na.rm = TRUE) +
   geom_point(aes(shape = Country, color = Country)) +
   geom_smooth() +
-  scale_y_continuous(limits = c(-1.5, 0.75))+
+  scale_y_continuous(limits = c(-1.5, 0.9))+
   scale_x_continuous(limits = c(-1.25, 1))+
-  theme_minimal(base_size = 10) +
+  theme_minimal(base_size = 10)+
+  theme(legend.key.size = unit(0.35, "cm"),
+        legend.title = element_blank())+
   labs(x = "Democracy Levels",
        y = "Rule of Law Score",
-       title = "Democracy and Rule of Law Relationship")
-  
+       title = "Democracy and Rule of Law",
+       subtitle = "1996 - 2012")
+
 ```
 
 
@@ -142,40 +144,24 @@ ggplot() +
       subtitle = "Democratization After Decolonization (1996 - 2016)")
 ```
 
-```{r}
-British %>%
-  ggplot(aes(x = Year,
-             y = Demo_Score,
-             color = Country)) +
-  geom_smooth() +
-   labs(x = "Year",
-      y = "Democracy Scores",
-      title = "Democratization",
-      subtitle = "Former British Colonies (1996 - 2016)")
-  
-
-```
-
-
-
 
 ```{r}
-
-demo_law <- demo_law %>%
-  mutate(AA = ifelse(Country %in% c("Malaysia","Singapore","Cambodia","Laos"), "Asia", "Africa"))
-  
-demo_law$Country <- factor(demo_law$Country, levels =c("Malaysia",
-            "Singapore",
-             "Cambodia",
-             "Laos",
-              "Ghana",
-              "Zambia",
-               "Sierra Leone",
-                "Algeria",
-               "Morocco",
-                "Tunisia"))
 
 demo_law %>%
+  mutate(AA = ifelse(
+    Country %in% c(
+      "Malaysia","Singapore",
+      "Cambodia","Laos"), 
+    "Asia", "Africa")) %>%
+
+  mutate(Country = factor(
+    Country, levels = c(
+      "Malaysia", "Singapore",
+          "Cambodia", "Laos",
+           "Ghana", "Zambia",
+           "Sierra Leone", "Algeria",
+           "Morocco", "Tunisia"))) %>%
+
   ggplot(mapping = aes(
     x = Country, 
     y = Demo_Score, 
@@ -189,23 +175,29 @@ demo_law %>%
  labs(x = NULL,
       y = "Democracy Scores",
       title = "Asia and Africa",
-      subtitle = "Democracy Levels (1956 - 2016)")
+      subtitle = "Democracy Levels (1946 - 2012)")
   
 ```
 
-```{r}
 
+```{r}
 British %>%
-  ggplot(aes(x = Country,
-             y = Demo_Score)) +
-  geom_boxplot(aes(color = Country)) +
+  ggplot(aes(x = Year,
+             y = ROL_Percentile,
+             shape = Country,
+             color = Country)) +
+  geom_point() +
+   scale_y_continuous(limits = c(0, 100)) +
+   scale_x_continuous(limits = c(1994, 2014)) +
   theme_minimal(base_size = 10) +
-  theme(legend.position="none",
-        legend.key.size = unit(0.25, "cm"),
-        legend.title = element_blank(),
-        axis.text.x = 
-            element_text(angle=90, hjust=1)) +
-  labs(x = NULL,
-       y = "Democracy Scores",
-       title = "Democracy Levels (1956 - 2016)")
+  theme(legend.key.size = unit(0.35, "cm"),
+        legend.title = element_blank()) +
+   labs(x = "Year",
+      y = "Rule of Law (Percentile)",
+      title = "Rule of Law Levels",
+      subtitle = "Former British Colonies (1996 - 2016)")
+  
+
 ```
+
+
