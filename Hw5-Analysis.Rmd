@@ -61,6 +61,8 @@ demo_law %>%
         ROL_Estimate), na.rm = TRUE) +
   geom_point(aes(shape = Country, color = Country)) +
   geom_smooth() +
+  scale_y_continuous(limits = c(-1.5, 0.75))+
+  scale_x_continuous(limits = c(-1.25, 1))+
   theme_minimal(base_size = 10) +
   labs(x = "Democracy Levels",
        y = "Rule of Law Score",
@@ -69,23 +71,6 @@ demo_law %>%
 ```
 
 
-```{r}
-
-demo_law %>%
-  ggplot(aes(x = Country,
-             y = Demo_Score)) +
-  geom_boxplot(aes(color = Country)) +
-  theme_minimal(base_size = 10) +
-  theme(legend.position="none",
-        legend.key.size = unit(0.25, "cm"),
-        legend.title = element_blank(),
-        axis.text.x = 
-            element_text(angle=90, hjust=1)) +
-  labs(x = NULL,
-       y = "Democracy Scores",
-       title = "Democracy Levels (1956 - 2016)")
-
-```
 
 ```{r}
 British <- demo_law %>%
@@ -104,15 +89,123 @@ French <- demo_law %>%
 
 ggplot() +
   geom_smooth(data = British, 
-              mapping = aes(Demo_Score, ROL_Estimate), 
-              color = "red") +
+              mapping = aes(Demo_Score, ROL_Estimate, 
+              color = "Former British Colonies")) +
   geom_smooth(data = French,
-              mapping = aes(Demo_Score, ROL_Estimate),
-              color = "blue")
-  
-
+              mapping = aes(Demo_Score, ROL_Estimate,
+              color = "Former French Colonies"))+
+    theme_minimal(base_size = 10) +
+    theme(legend.key.size = unit(0.3, "cm"),
+        legend.title = element_blank(),
+        legend.position = "bottom",
+        legend.direction = "horizontal") +
+ labs(x = "Democracy Scores",
+      y = "Rule of Law Scores",
+      title = "Former British & French Colonies",
+      subtitle = "Rule of Law and Democracy (1996 - 2016)")
 
 
 ```
 
 
+```{r}
+#Asia & Africa
+Asia <- demo_law %>%
+  filter(Country %in% c("Malaysia",
+                      "Singapore",
+                        "Cambodia",
+                        "Laos"))
+ 
+Africa <- demo_law %>%
+  filter(Country %in% c ("Ghana",
+                        "Zambia",
+                        "Sierra Leone",
+                         "Algeria",
+                         "Morocco",
+                         "Tunisia"))
+
+ggplot() +
+  geom_smooth(data = Asia, 
+              mapping = aes(Year, Demo_Score, 
+              color = "Asian Countries")) +
+  geom_smooth(data = Africa,
+              mapping = aes(Year, Demo_Score,
+              color = "African Countries"))+
+    theme_minimal(base_size = 10) +
+    theme(legend.key.size = unit(0.3, "cm"),
+        legend.title = element_blank(),
+        legend.position = "bottom",
+        legend.direction = "horizontal") +
+ labs(x = "Year",
+      y = "Democracy Scores",
+      title = "Asia and Africa",
+      subtitle = "Democratization After Decolonization (1996 - 2016)")
+```
+
+```{r}
+British %>%
+  ggplot(aes(x = Year,
+             y = Demo_Score,
+             color = Country)) +
+  geom_smooth() +
+   labs(x = "Year",
+      y = "Democracy Scores",
+      title = "Democratization",
+      subtitle = "Former British Colonies (1996 - 2016)")
+  
+
+```
+
+
+
+
+```{r}
+
+demo_law <- demo_law %>%
+  mutate(AA = ifelse(Country %in% c("Malaysia","Singapore","Cambodia","Laos"), "Asia", "Africa"))
+  
+demo_law$Country <- factor(demo_law$Country, levels =c("Malaysia",
+            "Singapore",
+             "Cambodia",
+             "Laos",
+              "Ghana",
+              "Zambia",
+               "Sierra Leone",
+                "Algeria",
+               "Morocco",
+                "Tunisia"))
+
+demo_law %>%
+  ggplot(mapping = aes(
+    x = Country, 
+    y = Demo_Score, 
+    fill = AA)) +
+  geom_boxplot() +
+  theme_minimal(base_size = 10) +
+    theme(legend.key.size = unit(0.3, "cm"),
+        legend.title = element_blank(),
+         axis.text.x = 
+            element_text(angle=45, hjust=1)) +
+ labs(x = NULL,
+      y = "Democracy Scores",
+      title = "Asia and Africa",
+      subtitle = "Democracy Levels (1956 - 2016)")
+  
+```
+
+```{r}
+
+British %>%
+  ggplot(aes(x = Country,
+             y = Demo_Score)) +
+  geom_boxplot(aes(color = Country)) +
+  theme_minimal(base_size = 10) +
+  theme(legend.position="none",
+        legend.key.size = unit(0.25, "cm"),
+        legend.title = element_blank(),
+        axis.text.x = 
+            element_text(angle=90, hjust=1)) +
+  labs(x = NULL,
+       y = "Democracy Scores",
+       title = "Democracy Levels (1956 - 2016)")
+```
