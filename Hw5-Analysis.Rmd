@@ -55,16 +55,64 @@ library(tidyverse)
 ```
 
 
-```{r}
+```{r, message = FALSE}
 demo_law %>%
   ggplot(aes(Demo_Score, 
-        ROL_Percentile), na.rm = TRUE) +
-  geom_point() + 
-  geom_smooth()
+        ROL_Estimate), na.rm = TRUE) +
+  geom_point(aes(shape = Country, color = Country)) +
+  geom_smooth() +
+  theme_minimal(base_size = 10) +
+  labs(x = "Democracy Levels",
+       y = "Rule of Law Score",
+       title = "Democracy and Rule of Law Relationship")
   
 ```
 
 
 ```{r}
+
+demo_law %>%
+  ggplot(aes(x = Country,
+             y = Demo_Score)) +
+  geom_boxplot(aes(color = Country)) +
+  theme_minimal(base_size = 10) +
+  theme(legend.position="none",
+        legend.key.size = unit(0.25, "cm"),
+        legend.title = element_blank(),
+        axis.text.x = 
+            element_text(angle=90, hjust=1)) +
+  labs(x = NULL,
+       y = "Democracy Scores",
+       title = "Democracy Levels (1956 - 2016)")
+
 ```
+
+```{r}
+British <- demo_law %>%
+  filter(Country %in% c("Malaysia",
+                        "Singapore",
+                         "Ghana",
+                        "Zambia",
+                        "Sierra Leone"))
+
+French <- demo_law %>%
+  filter(Country %in% c ("Cambodia",
+                         "Laos",
+                         "Algeria",
+                         "Morocco",
+                         "Tunisia"))
+
+ggplot() +
+  geom_smooth(data = British, 
+              mapping = aes(Demo_Score, ROL_Estimate), 
+              color = "red") +
+  geom_smooth(data = French,
+              mapping = aes(Demo_Score, ROL_Estimate),
+              color = "blue")
+  
+
+
+
+```
+
 
