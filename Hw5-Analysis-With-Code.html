@@ -135,8 +135,7 @@ $(document).ready(function () {
 </ol>
 <p>In this report, I select a sample of 10 countries , including five former British colonies (Malaysia, Singapore, Zambia, Ghana, Sierra Leone), and five former French colonies (Cambodia, Laos, Morocco, Algeria, Tunisia). Each group is composed of two Asian countries and three African countries.</p>
 <pre class="r"><code>#Import the UDS democracy index
-democracy &lt;- read_csv(&quot;uds_summary.csv&quot;,
-                       col_types = cols(year = col_number())) %&gt;%
+democracy &lt;- read_csv(&quot;uds_summary.csv&quot;) %&gt;%
 #Filter the 10 countries for my analysis
     filter(country %in% c(&quot;Malaysia&quot;, 
                       &quot;Singapore&quot;, 
@@ -158,8 +157,7 @@ democracy &lt;- read_csv(&quot;uds_summary.csv&quot;,
 
 #Import the WB's Rule of Law Index
 #The data was narrowed down to the 10 countries when downloaded from WB
-law &lt;- read_csv(&quot;Rule_of_law_WB.csv&quot;,
-                       col_types = cols(Year = col_number())) %&gt;%
+law &lt;- read_csv(&quot;Rule_of_law_WB.csv&quot;) %&gt;%
 #Rename variables
     rename(ROL_Estimate = &quot;Rule of Law: Estimate [RL.EST]&quot;,
            ROL_Percentile = &quot;Rule of Law: Percentile Rank [RL.PER.RNK]&quot;,

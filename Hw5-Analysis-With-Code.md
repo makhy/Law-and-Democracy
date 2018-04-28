@@ -25,8 +25,7 @@ In this report, I select a sample of 10 countries , including five former Britis
 
 ```r
 #Import the UDS democracy index
-democracy <- read_csv("uds_summary.csv",
-                       col_types = cols(year = col_number())) %>%
+democracy <- read_csv("uds_summary.csv") %>%
 #Filter the 10 countries for my analysis
     filter(country %in% c("Malaysia", 
                       "Singapore", 
@@ -48,8 +47,7 @@ democracy <- read_csv("uds_summary.csv",
 
 #Import the WB's Rule of Law Index
 #The data was narrowed down to the 10 countries when downloaded from WB
-law <- read_csv("Rule_of_law_WB.csv",
-                       col_types = cols(Year = col_number())) %>%
+law <- read_csv("Rule_of_law_WB.csv") %>%
 #Rename variables
     rename(ROL_Estimate = "Rule of Law: Estimate [RL.EST]",
            ROL_Percentile = "Rule of Law: Percentile Rank [RL.PER.RNK]",
