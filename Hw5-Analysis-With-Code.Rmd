@@ -9,7 +9,7 @@ output:
 
 ## Introduction
 
-Democracy and the rule of law are often regarded as closely associated universal values. They are also viewed as wonderful legacies that Western powers have left to their former colonies. Is this really the case? This report revisits the conventional wisdom by looking at the data from 10 Asian and African countries which gained independence from Britain or France after World War Two (WWII).
+Democracy and the rule of law are often regarded as closely associated universal values. They are also viewed as wonderful legacies that the Western powers have left to their former colonies. Is this really the case? This report revisits the conventional wisdom by looking at the data from 10 Asian and African countries which gained independence from Britain or France after World War Two (WWII).
 
 This report uses two sets of data: 
 
@@ -31,7 +31,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-In this report, I select a sample of 10 countries , including five former British colonies (Malaysia, Singapore, Zambia, Ghana, Sierra Leone), and five former French colonies (Cambodia, Laos, Morocco, Algeria, Tunisia). Each group are compose of two Asian countries and three African countries. 
+In this report, I select a sample of 10 countries , including five former British colonies (Malaysia, Singapore, Zambia, Ghana, Sierra Leone), and five former French colonies (Cambodia, Laos, Morocco, Algeria, Tunisia). Each group is composed of two Asian countries and three African countries. 
 
 ```{r}
 #Import the UDS democracy index
@@ -82,7 +82,7 @@ demo_law <- democracy %>%
 
 ```
 
-## 1.Relationship between rule of law and democracy
+## 1.Relationship between the rule of law and democracy
 
 The following line graph shows the general bivariate relationship between the levels of democracy and the estimate scores of the rule of law. It covers years 1996 to 2012 as this is the time frame the two datasets have in common.
 
@@ -164,7 +164,7 @@ Interestingly, the former British colonies line has shown a negative relationshi
 
 ## 3. Variations Among Former British Colonies
 
-The following graph compares world rankings (in percentile) of the rule of law of the five British colonies. 
+The following graph compares the world rankings (in percentile) of the rule of law of the five British colonies. 
 
 ```{r}
 #Recycle the former British colonies dataset
@@ -190,12 +190,12 @@ British %>%
 
 The above graph demonstrates huge variations between different British colonies. On the higher end, Singapore (in blue), which has a renowoned legal system, has consistently ranked at the world top (> 80th percentile) in its performance of the rule of law. On the contrary, the African country Sierra Leone has never made its way out of the lower quartile (25th percentile) in its quality of the rule of law after 1996.
 
-Therefore, while the British legacy may have to a certain extent shaped the political institutions in these countries in the post-colonial era, the endogenous political and cultural tradition of each of these countries have obviously played an imperative role as well. 
+Therefore, while the British legacy may have to a certain extent shaped the political institutions in these countries in the post-colonial era, the endogenous political and cultural tradition of each of these countries has obviously played an imperative role as well. 
 
 
 ## 4. Democratization in Asia and Africa (Part I)
 
-The following graph compare the change of levels of democracy in Asian and African former colonies from 1946 to 2012. 
+The following graph compares the change of levels of democracy in Asian and African former colonies from 1946 to 2012. 
 
 ```{r}
 #Create a dataset for Asian countries
@@ -234,7 +234,7 @@ ggplot() +
 
 ```
 
-The above graph shows the African countries, which initially lagged behind the Asian countries before 1990, has surpassed the latter by embarking a huge progress in democratization in the past two decades. 
+The above graph shows the African countries, which initially lagged behind the Asian countries before 1990, have surpassed the latter by embarking a huge progress in democratization in the past two decades. 
 
 Nevertheless, both groups of countries have demonstrated similarly low scores of democracy (mostly < 0). It can be explained with the lack-of-democracy nature of colonial rule, which has profound impact on shaping the post-colonial institutions in these countries.
 
