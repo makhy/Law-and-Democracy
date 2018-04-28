@@ -1,0 +1,343 @@
+---
+title: "Democracy and The Rule of Law"
+author: "Hoi-Ying Mak"
+date: "4/26/2018"
+output: 
+  html_document:
+    keep_md: true
+---
+
+## Introduction
+
+Democracy and the rule of law are often regarded as closely associated universal values. They are also viewed as wonderful legacies that Western powers have left to their former colonies. Is this really the case? This report revisits the conventional wisdom by looking at the data from 10 Asian and African countries which gained independence from Britain or France after World War Two (WWII).
+
+This report uses two sets of data: 
+
+1) Unified Democracy Scores (UDS), which incorporates data from 1946 to 2012 from three original measures - Freedom House (2014), Polity IV (Marshall et al. 2012) and VanHanen (2012).
+http://www.unified-democracy-scores.org/uds.html
+
+2) World Bank (WB)'s Rule of Law Index, a subset of its governance indicators, measures and ranks the public's trust in a country's rule of law from 1996 to 2016. 
+http://databank.worldbank.org/data/reports.aspx?source=worldwide-governance-indicators#
+
+```{r setup, include = FALSE}
+#Set include = FALSE to hide this code chunk
+#Download necessary libraries
+library(tidyverse)
+library(ggpubr)
+
+#Set global options to hide all messages and warnings 
+knitr::opts_chunk$set(
+  message = FALSE,
+  warning = FALSE,
+  echo = FALSE
+)
+```
+
+In this report, I select a sample of 10 countries , including five former British colonies (Malaysia, Singapore, Zambia, Ghana, Sierra Leone), and five former French colonies (Cambodia, Laos, Morocco, Algeria, Tunisia). Each group are compose of two Asian countries and three African countries. 
+
+```{r}
+#Import the UDS democracy index
+democracy <- read_csv("uds_summary.csv",
+                       col_types = cols(year = col_number())) %>%
+#Filter the 10 countries for my analysis
+    filter(country %in% c("Malaysia", 
+                      "Singapore", 
+                      "Zambia", 
+                      "Ghana", 
+                      "Sierra Leone", 
+                      "Laos", 
+                      "Cambodia", 
+                      "Morocco", 
+                      "Algeria", 
+                      "Tunisia")) %>%
+#Remove useless variables
+   select(country, year, mean) %>%
+#Rename variables to match with the law dataframe
+   rename(Year = "year",
+          Country = "country",
+          Demo_Score = "mean")
+
+
+#Import the WB's Rule of Law Index
+#The data was narrowed down to the 10 countries when downloaded from WB
+law <- read_csv("Rule_of_law_WB.csv",
+                       col_types = cols(Year = col_number())) %>%
+#Rename variables
+    rename(ROL_Estimate = "Rule of Law: Estimate [RL.EST]",
+           ROL_Percentile = "Rule of Law: Percentile Rank [RL.PER.RNK]",
+           Year = "Time",
+           Country = "Country Name") %>%
+#Select the estimate scores and ranking (percentile) of rule of law
+    select(Year, 
+           Country, 
+           ROL_Estimate, 
+           ROL_Percentile) %>%
+#Change Lao PDR to Laos to match the democracy data
+    mutate(Country = ifelse(Country == "Lao PDR", 'Laos', Country)) %>%
+#Change Year to numeric   
+    mutate(Year = as.numeric(Year))
+
+
+#Combine the two dataframes
+demo_law <- democracy %>%
+    left_join(law, by = c("Year", "Country"))
+
+```
+
+## 1.Relationship between rule of law and democracy
+
+The following line graph shows the general bivariate relationship between the levels of democracy and the estimate scores of the rule of law. It covers years 1996 to 2012 as this is the time frame the two datasets have in common.
+
+```{r}
+demo_law %>%
+#Show bivariate relationship between law and democracy scores
+  ggplot(aes(Demo_Score, 
+        ROL_Estimate), na.rm = TRUE) +
+#Use color to indicate variations among countries
+  geom_point(aes(color = Country)) +
+  geom_smooth() +
+  
+#Adjust the scale of x-axis and y-axis
+  scale_y_continuous(limits = c(-1.5, 0.9))+
+  scale_x_continuous(limits = c(-1.25, 1))+
+  theme_minimal(base_size = 10)+
+#Adjust size and title of the legend
+  theme(legend.key.size = unit(0.35, "cm"),
+        legend.title = element_blank())+
+  labs(x = "Democracy Levels",
+       y = "Rule of Law Score",
+       title = "Democracy and The Rule of Law",
+       subtitle = "1996 - 2012")
+```
+
+The loess line shows a crude positive relationship between the level of democracy and the estimated score of the rule of law. 
+
+However, the colored dotted plot shows huge variations among different countries. For instance, Tunisia (in fuchsia) has acceptable quality of rule of law (~ 0), but low democracy scores (~ -0.5). On the other hand, Sierra Leone (in light blue) has low rule of law scores (-0.75) but relatively better democracy scores (~ 0).
+
+What are the determinants behind these variations among the 10 countries? The following graphs explores potential influence from different colonial powers (Britain VS France) and regions (Asia VS Africa).
+
+
+## 2. Different Legacies from Britain and France
+
+The following graph compare the law and democracy scores of two group of countries - former British colonies, and former French colonies.  
+
+```{r}
+#Create a data set for former British colonies
+British <- demo_law %>%
+  filter(Country %in% c("Malaysia",
+                        "Singapore",
+                         "Ghana",
+                        "Zambia",
+                        "Sierra Leone"))
+
+#Create a data set for former French colonies
+French <- demo_law %>%
+  filter(Country %in% c ("Cambodia",
+                         "Laos",
+                         "Algeria",
+                         "Morocco",
+                         "Tunisia"))
+
+#Plot a line for each group to make comparison
+ggplot() +
+  geom_smooth(data = British, 
+              mapping = aes(Demo_Score, ROL_Estimate, 
+              color = "Former British Colonies")) +
+  geom_smooth(data = French,
+              mapping = aes(Demo_Score, ROL_Estimate,
+              color = "Former French Colonies"))+
+    theme_minimal(base_size = 10) +
+  
+#Format the legend to fit the size and shape of the graph
+    theme(legend.key.size = unit(0.3, "cm"),
+        legend.title = element_blank(),
+        legend.position = "bottom",
+        legend.direction = "horizontal") +
+ labs(x = "Democracy Scores",
+      y = "Rule of Law Scores",
+      title = "British and French Legacies?",
+      subtitle = "Law and Democracy in Their Former Colonies (1996 - 2012)")
+```
+
+The comparison shows former British colonies generally have a significantly higher level of democracy, and moderately better rule of law (the red line is located on the right, upper hand side). 
+
+Interestingly, the former British colonies line has shown a negative relationship between the rule of law and democracy. At the left end of red line are countries that have excellent scores rule of law (>1.5) but low democracy levels (<0.25). It can be explained by the British empire's strategic emphasis on constructing a legal complex, rather than a democratic government, as a form of domination over its colonies.
+
+
+## 3. Variations Among Former British Colonies
+
+The following graph compares world rankings (in percentile) of the rule of law of the five British colonies. 
+
+```{r}
+#Recycle the former British colonies dataset
+British %>%
+#Use percentile to compare thier world rankings
+  ggplot(aes(x = Year,
+             y = ROL_Percentile,
+             shape = Country,
+             color = Country)) +
+  geom_point() +
+#Format the scale of y-axis and x-axis to match data
+   scale_y_continuous(limits = c(0, 100)) +
+   scale_x_continuous(limits = c(1994, 2014)) +
+  theme_minimal(base_size = 10) +
+  theme(legend.key.size = unit(0.35, "cm"),
+        legend.title = element_blank()) +
+   labs(x = "Year",
+      y = "Rule of Law (Percentile)",
+      title = "Not all British Colonies Are The Same",
+      subtitle = "The Rule of Law Rankings (1996 - 2016)")
+
+```
+
+The above graph demonstrates huge variations between different British colonies. On the higher end, Singapore (in blue), which has a renowoned legal system, has consistently ranked at the world top (> 80th percentile) in its performance of the rule of law. On the contrary, the African country Sierra Leone has never made its way out of the lower quartile (25th percentile) in its quality of the rule of law after 1996.
+
+Therefore, while the British legacy may have to a certain extent shaped the political institutions in these countries in the post-colonial era, the endogenous political and cultural tradition of each of these countries have obviously played an imperative role as well. 
+
+
+## 4. Democratization in Asia and Africa (Part I)
+
+The following graph compare the change of levels of democracy in Asian and African former colonies from 1946 to 2012. 
+
+```{r}
+#Create a dataset for Asian countries
+Asia <- demo_law %>%
+  filter(Country %in% c("Malaysia",
+                      "Singapore",
+                        "Cambodia",
+                        "Laos"))
+#Create a dataset for African countries 
+Africa <- demo_law %>%
+  filter(Country %in% c ("Ghana",
+                        "Zambia",
+                        "Sierra Leone",
+                         "Algeria",
+                         "Morocco",
+                         "Tunisia"))
+
+ggplot() +
+#Make two line graphs to compare democracy in Asia and Africa
+  geom_smooth(data = Asia, 
+              mapping = aes(Year, Demo_Score, 
+              color = "Asian Countries")) +
+  geom_smooth(data = Africa,
+              mapping = aes(Year, Demo_Score,
+              color = "African Countries"))+
+    theme_minimal(base_size = 10) +
+#Format the legend to fit size of graph
+    theme(legend.key.size = unit(0.3, "cm"),
+        legend.title = element_blank(),
+        legend.position = "bottom",
+        legend.direction = "horizontal") +
+ labs(x = "Year",
+      y = "Democracy Scores",
+      title = "Asia and Africa",
+      subtitle = "Democratization After Decolonization (1946 - 2012)")
+
+```
+
+The above graph shows the African countries, which initially lagged behind the Asian countries before 1990, has surpassed the latter by embarking a huge progress in democratization in the past two decades. 
+
+Nevertheless, both groups of countries have demonstrated similarly low scores of democracy (mostly < 0). It can be explained with the lack-of-democracy nature of colonial rule, which has profound impact on shaping the post-colonial institutions in these countries.
+
+
+## 5. Democratization in Asia and Africa (Part II) 
+
+The following graph details the range of democracy scores of each of the 10 countries during 1946 to 2012.
+
+```{r}
+demo_law %>%
+#Create a new variable to differentiate Asian/African countries
+  mutate(AA = ifelse(
+    Country %in% c(
+      "Malaysia","Singapore",
+      "Cambodia","Laos"), 
+    "Asia", "Africa")) %>%
+  
+#Use factor to reorder countries for Asian/African grouping
+  mutate(Country = factor(
+    Country, levels = c(
+      "Malaysia", "Singapore",
+          "Cambodia", "Laos",
+           "Ghana", "Zambia",
+           "Sierra Leone", "Algeria",
+           "Morocco", "Tunisia"))) %>%
+
+#Use fill to visualize African/Asian groupings by color
+  ggplot(mapping = aes(
+    x = Country, 
+    y = Demo_Score, 
+    fill = AA)) +
+  geom_boxplot() +
+  theme_minimal(base_size = 10) +
+#Format to adjust the legend and x-axis lebels 
+    theme(legend.key.size = unit(0.4, "cm"),
+        legend.title = element_blank(),
+         axis.text.x = 
+            element_text(angle=45, hjust=1)) +
+ labs(x = NULL,
+      y = "Democracy Scores",
+      title = "Asia and Africa",
+      subtitle = "Democracy Levels (1946 - 2012)")
+  
+```
+
+The above boxplot shows African countries generally have a more significant change in their democracy scores between 1946 and 2012. It can reflect a more robust democratization, or more unstable governance that keeps swinging between democracy and authoritarian rule. The Asian countries, specifically Singapore, show a much more consistent performance in democracy throughout this period of time.
+
+
+## 6. Asia: The Dissoluted British and French Territories
+
+The following graphs compares democracy of two interesting pairs: 1) Malyaisa and Singapore, which were dissoluted from the British Malaya; 2) Laos and Cambodia, which were descended from the French Indochina.
+
+```{r}
+#Create the fist data set for former British colonies in Asia
+Br_Asia <- demo_law %>%
+  filter(Country %in% c("Malaysia", "Singapore")) %>%
+#Draw line graph to show democracy trend
+  ggplot(aes(x = Year, 
+             y = Demo_Score, 
+             color = Country)) +
+  geom_smooth()+
+  theme_classic(base_size = 10) +
+#Adjust the scale to match the second graph
+  scale_y_continuous(limits = c(-1, 1))+
+  theme(legend.key.size = unit(0.4, "cm"),
+        legend.title = element_blank(),
+#Move the legend to bottom to fit graphs
+        legend.position = "bottom")+
+  labs(x = "Year",
+       y = "Democracy Scores",
+       title = "Asia: Singapore and Malaysia",
+       subtitle = "The British Legacies (1946 - 2016)")
+
+#Create the second data set for former French colonies in Asia
+Fr_Asia <- demo_law %>%
+  filter(Country %in% c("Laos", "Cambodia")) %>%
+#Draw line graph to show democracy trend
+  ggplot(aes(x = Year, 
+               y = Demo_Score, 
+               color = Country)) +
+  geom_smooth( ) +
+    theme_classic(base_size = 10) +
+#Adjust the scale to match the first graph
+    scale_y_continuous(limits = c(-1, 1)) +
+  theme(legend.key.size = unit(0.4, "cm"),
+        legend.title = element_blank(),
+#Move the legend to bottom to fit graphs
+        legend.position = "bottom") +
+  labs(x = "Year",
+       y = NULL,
+       title = "Asia: Laos and Cambodia",
+       subtitle = "The French Legacies (1946 - 2016)")
+
+#Use ggarrange from ggpubr to juxtapose the two graphs 
+#Compare French and British legacies in Asia
+ggarrange(Br_Asia, Fr_Asia,
+          ncol = 2)
+  
+```
+
+The above graphs show the former British-ruled twins - Malaysia and Singapore, has generally better scores in levels of democracy. Their performance are rather stable. On the other hand, the French-ruled twins - Cambodia and Laos, shows a more robust democracy score change throughout the past six decades. Cambodia, in particular, has made remarkable progress in improving its democracy, moving from almost -1.0, to > -0.5 in the latest data.
+
+
+
