@@ -13,11 +13,10 @@ Democracy and the rule of law are often regarded as closely associated universal
 
 This report uses two sets of data: 
 
-1) Unified Democracy Scores (UDS), which incorporates data from 1946 to 2012 from three original measures - Freedom House (2014), Polity IV (Marshall et al. 2012) and VanHanen (2012).
-http://www.unified-democracy-scores.org/uds.html
+1) [Unified Democracy Scores (UDS)](http://www.unified-democracy-scores.org/uds.html), which incorporates data from 1946 to 2012 from three original measures - Freedom House (2014), Polity IV (Marshall et al. 2012) and VanHanen (2012).
 
-2) World Bank (WB)'s Rule of Law Index, a subset of its governance indicators, measures and ranks the public's trust in a country's rule of law from 1996 to 2016. 
-http://databank.worldbank.org/data/reports.aspx?source=worldwide-governance-indicators#
+2) [World Bank's Rule of Law Index](http://databank.worldbank.org/data/reports.aspx?source=worldwide-governance-indicators#), a subset of its governance indicators, measures and ranks the public's trust in a country's rule of law from 1996 to 2016. 
+
 
 ```{r setup, include = FALSE}
 #Set include = FALSE to hide this code chunk
@@ -286,7 +285,7 @@ The above boxplot shows African countries generally have a more significant chan
 
 ## 6. Asia: The Dissoluted British and French Territories
 
-The following graphs compares democracy of two interesting pairs: 1) Malyaisa and Singapore, which were dissoluted from the British Malaya; 2) Laos and Cambodia, which were descended from the French Indochina.
+The following graphs compares democracy of two interesting pairs: 1) Malyaisa and Singapore, which were separated from the dissolved British Malaya; 2) Laos and Cambodia, which were separated from the dissolved French Indochina.
 
 ```{r}
 #Create the fist data set for former British colonies in Asia
@@ -336,7 +335,7 @@ ggarrange(Br_Asia, Fr_Asia,
   
 ```
 
-The above graphs show the former British-ruled twins - Malaysia and Singapore, has generally better scores in levels of democracy. Their performance are rather stable. On the other hand, the French-ruled twins - Cambodia and Laos, shows a more robust democracy score change throughout the past six decades. Cambodia, in particular, has made remarkable progress in improving its democracy, moving from almost -1.0, to > -0.5 in the latest data.
+The above graphs show the former British-ruled twins - Malaysia and Singapore, has generally better scores in levels of democracy. Their performance are rather stable. On the other hand, the former French-ruled twins - Cambodia and Laos, shows a more robust democracy score change throughout the past six decades. Cambodia, in particular, has made remarkable progress in improving its democracy, moving from almost -1.0, to > -0.5 in the latest data.
 
 
 
