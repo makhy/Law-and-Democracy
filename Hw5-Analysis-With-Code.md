@@ -104,7 +104,7 @@ The loess line shows a crude positive relationship between the level of democrac
 
 However, the colored dotted plot shows huge variations among different countries. For instance, Tunisia (in fuchsia) has acceptable quality of rule of law (~ 0), but low democracy scores (~ -0.5). On the other hand, Sierra Leone (in light blue) has low rule of law scores (-0.75) but relatively better democracy scores (~ 0).
 
-What are the determinants behind these variations among the 10 countries? The following graphs explores potential influence from different colonial powers (Britain VS France) and regions (Asia VS Africa).
+What are the determinants behind these variations among the 10 countries? The following graphs explore potential influence from different colonial powers (Britain VS France) and regions (Asia VS Africa).
 
 
 ## 2. Different Legacies from Britain and France
@@ -284,7 +284,7 @@ demo_law %>%
 The above boxplot shows African countries generally have a more significant change in their democracy scores between 1946 and 2012. It can reflect a more robust democratization, or more unstable governance that keeps swinging between democracy and authoritarian rule. The Asian countries, specifically Singapore, show a much more consistent performance in democracy throughout this period of time.
 
 
-## 6. Asia: The Dissoluted British and French Territories
+## 6. Asia: The Dissolved British and French Territories
 
 The following graphs compares democracy of two interesting pairs: 1) Malyaisa and Singapore, which were separated from the dissolved British Malaya; 2) Laos and Cambodia, which were separated from the dissolved French Indochina.
 
