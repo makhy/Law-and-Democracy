@@ -1,4 +1,3 @@
-# hw05
 Homework 05
 ==============
 Hoi-Ying Mak
