@@ -7,7 +7,7 @@ output: github_document
 
 ## Introduction
 
-Democracy and the rule of law are often regarded as closely associated universal values. They are also viewed as wonderful legacies that the Western powers have left to their former colonies. Is this really the case? This report revisits the conventional wisdom by looking at the data from 10 Asian and African countries which gained independence from Britain or France after World War Two (WWII).
+Democracy and the rule of law are often regarded as closely associated universal values. They are also viewed as wonderful legacies that the Western powers have left to their former colonies. Is this really the case? This report revisits the conventional wisdom by looking at the data from 10 Asian and African countries which gained independence from Britain or France after World War II (WWII).
 
 This report uses two sets of data: 
 
@@ -334,6 +334,4 @@ ggarrange(Br_Asia, Fr_Asia,
 ```
 
 The above graphs show the former British-ruled twins - Malaysia and Singapore, has generally better scores in levels of democracy. Their performance are rather stable. On the other hand, the former French-ruled twins - Cambodia and Laos, shows a more robust democracy score change throughout the past six decades. Cambodia, in particular, has made remarkable progress in improving its democracy, moving from almost -1.0, to > -0.5 in the latest data.
-
-
 

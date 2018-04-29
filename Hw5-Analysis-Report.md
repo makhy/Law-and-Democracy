@@ -6,7 +6,7 @@ Hoi-Ying Mak
 Introduction
 ------------
 
-Democracy and the rule of law are often regarded as closely associated universal values. They are also viewed as wonderful legacies that the Western powers have left to their former colonies. Is this really the case? This report revisits the conventional wisdom by looking at the data from 10 Asian and African countries which gained independence from Britain or France after World War Two (WWII).
+Democracy and the rule of law are often regarded as closely associated universal values. They are also viewed as wonderful legacies that the Western powers have left to their former colonies. Is this really the case? This report revisits the conventional wisdom by looking at the data from 10 Asian and African countries which gained independence from Britain or France after World War II (WWII).
 
 This report uses two sets of data:
 
