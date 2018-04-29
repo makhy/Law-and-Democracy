@@ -3,6 +3,14 @@ Democracy and The Rule of Law
 Hoi-Ying Mak
 4/26/2018
 
+-   [Introduction](#introduction)
+-   [1.Relationship between the rule of law and democracy](#relationship-between-the-rule-of-law-and-democracy)
+-   [2.Different Legacies from Britain and France](#different-legacies-from-britain-and-france)
+-   [3.Variations Among Former British Colonies](#variations-among-former-british-colonies)
+-   [4.Democratization in Asia and Africa (Part I)](#democratization-in-asia-and-africa-part-i)
+-   [5.Democratization in Asia and Africa (Part II)](#democratization-in-asia-and-africa-part-ii)
+-   [6.Asia: The Dissolved British and French Territories](#asia-the-dissolved-british-and-french-territories)
+
 Introduction
 ------------
 
@@ -29,8 +37,8 @@ However, the colored dotted plot shows huge variations among different countries
 
 What are the determinants behind these variations among the 10 countries? The following graphs explore potential influence from different colonial powers (Britain VS France) and regions (Asia VS Africa).
 
-2. Different Legacies from Britain and France
----------------------------------------------
+2.Different Legacies from Britain and France
+--------------------------------------------
 
 The following graph compare the law and democracy scores of two group of countries - former British colonies, and former French colonies.
 
@@ -40,8 +48,8 @@ The comparison shows former British colonies generally have a significantly high
 
 Interestingly, the former British colonies line has shown a negative relationship between the rule of law and democracy. At the left end of red line are countries that have excellent scores rule of law (&gt;1.5) but low democracy levels (&lt;0.25). It can be explained by the British empire's strategic emphasis on constructing a legal complex, rather than a democratic government, as a form of domination over its colonies.
 
-3. Variations Among Former British Colonies
--------------------------------------------
+3.Variations Among Former British Colonies
+------------------------------------------
 
 The following graph compares the world rankings (in percentile) of the rule of law of the five British colonies.
 
@@ -51,8 +59,8 @@ The above graph demonstrates huge variations between different British colonies.
 
 Therefore, while the British legacy may have to a certain extent shaped the political institutions in these countries in the post-colonial era, the endogenous political and cultural tradition of each of these countries has obviously played an imperative role as well.
 
-4. Democratization in Asia and Africa (Part I)
-----------------------------------------------
+4.Democratization in Asia and Africa (Part I)
+---------------------------------------------
 
 The following graph compares the change of levels of democracy in Asian and African former colonies from 1946 to 2012.
 
@@ -62,8 +70,8 @@ The above graph shows the African countries, which initially lagged behind the A
 
 Nevertheless, both groups of countries have demonstrated similarly low scores of democracy (mostly &lt; 0). It can be explained with the lack-of-democracy nature of colonial rule, which has profound impact on shaping the post-colonial institutions in these countries.
 
-5. Democratization in Asia and Africa (Part II)
------------------------------------------------
+5.Democratization in Asia and Africa (Part II)
+----------------------------------------------
 
 The following graph details the range of democracy scores of each of the 10 countries during 1946 to 2012.
 
@@ -71,8 +79,8 @@ The following graph details the range of democracy scores of each of the 10 coun
 
 The above boxplot shows African countries generally have a more significant change in their democracy scores between 1946 and 2012. It can reflect a more robust democratization, or more unstable governance that keeps swinging between democracy and authoritarian rule. The Asian countries, specifically Singapore, show a much more consistent performance in democracy throughout this period of time.
 
-6. Asia: The Dissolved British and French Territories
------------------------------------------------------
+6.Asia: The Dissolved British and French Territories
+----------------------------------------------------
 
 The following graphs compares democracy of two interesting pairs: 1) Malyaisa and Singapore, which were separated from the dissolved British Malaya; 2) Laos and Cambodia, which were separated from the dissolved French Indochina.
 
