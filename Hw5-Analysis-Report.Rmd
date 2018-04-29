@@ -2,9 +2,7 @@
 title: "Democracy and The Rule of Law"
 author: "Hoi-Ying Mak"
 date: "4/26/2018"
-output: 
-  html_document:
-    keep_md: true
+output: github_document
 ---
 
 ## Introduction
